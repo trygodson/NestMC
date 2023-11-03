@@ -1,4 +1,6 @@
-import { IsEmail, IsStrongPassword, IsOptional, IsArray, IsString, IsNotEmpty } from 'class-validator';
+import { Role } from '@app/common';
+import { Type } from 'class-transformer';
+import { IsEmail, IsStrongPassword, IsOptional, IsArray, IsString, IsNotEmpty, ValidateNested } from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail()
@@ -9,7 +11,11 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  @IsNotEmpty({ each: true })
-  roles?: string[];
+  @ValidateNested()
+  @Type(() => UserDto)
+  roles?: UserDto[];
+}
+class UserDto {
+  @IsString()
+  name: string;
 }

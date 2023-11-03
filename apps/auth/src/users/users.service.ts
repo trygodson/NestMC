@@ -14,7 +14,7 @@ export class UsersService {
     const user = new User({
       ...createUser,
       password: await bcrypt.hash(createUser.password, 10),
-      roles: createUser.roles?.map((roleDto) => new Role({ name: roleDto })),
+      roles: createUser.roles?.map((roleDto) => new Role({ name: roleDto.name })),
     });
     return this.usersRepository.create(user);
   }
