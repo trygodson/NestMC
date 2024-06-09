@@ -1,5 +1,5 @@
-FROM node:alpine As development
-
+FROM node:alpine3.2.0 As development
+ENV NODE_VERSION 18.20.3
 WORKDIR /usr/src/app
 
 COPY package.json ./
@@ -19,8 +19,8 @@ RUN cd apps/auth && pnpm install
 
 RUN pnpm run build
 
-FROM node:alpine As production
-
+FROM node:alpine3.2.0 As production
+ENV NODE_VERSION 18.20.3
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
