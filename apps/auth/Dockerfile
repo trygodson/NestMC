@@ -3,16 +3,16 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
-COPY tsconfig.json tsconfig.json
-COPY tsconfig.build.json tsconfig.build.json
+COPY tsconfig.json ./tsconfig.json
+COPY tsconfig.build.json ./tsconfig.build.json
 
 
 RUN npm install -g pnpm
 
 RUN pnpm install
 
-COPY apps/auth apps/auth
-COPY libs libs
+COPY apps/auth ./apps/auth
+COPY libs ./libs
 
 RUN cd apps/auth && pnpm install
 
